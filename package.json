@@ -1,0 +1,23 @@
+{
+  "name": "supersweet-pubsub",
+  "version": "1.0.0",
+  "description": "Simple publish && subscribe communication interface",
+  "main": "dist/pubsub.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oldboyxx/pubsub.git"
+  },
+  "keywords": [
+    "pub",
+    "sub",
+    "pubsub",
+    "modules",
+    "communication"
+  ],
+  "author": "Ivor Reić",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oldboyxx/pubsub/issues"
+  },
+  "homepage": "https://github.com/oldboyxx/pubsub#readme"
+}
