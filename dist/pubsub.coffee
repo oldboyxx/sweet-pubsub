@@ -131,8 +131,13 @@
           if subs[i].label == labelOrCB || subs[i].callback == labelOrCB
             subs.splice i, 1
 
+
   return
+    emit: pub,
     pub: pub,
+    on: sub,
     sub: sub,
+    once: subOnce,
     subOnce: subOnce,
+    off: unsub,
     unsub: unsub

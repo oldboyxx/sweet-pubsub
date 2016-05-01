@@ -11,8 +11,8 @@
     "pub",
     "sub",
     "pubsub",
-    "modules",
-    "communication"
+    "emit",
+    "modules"
   ],
   "author": "Ivor Reić",
   "license": "ISC",

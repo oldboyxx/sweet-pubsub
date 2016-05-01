@@ -193,9 +193,13 @@
   };
 
   return {
+    emit: pub,
     pub: pub,
+    on: sub,
     sub: sub,
+    once: subOnce,
     subOnce: subOnce,
+    off: unsub,
     unsub: unsub
   }
 
