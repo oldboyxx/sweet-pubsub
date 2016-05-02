@@ -6,7 +6,7 @@
   else
     window.pubsub = factory()
 
-) ->
+)(->
 
   subscriptions = {}
 
@@ -21,6 +21,11 @@
 
 
   pub = (topics, args...) ->
+    for topic in topics.split(" ")
+      _invokeCallbacks topic, args...
+
+
+  pubs = (topics, args...) ->
     for topic in topics.split(" ")
 
       if topic.indexOf(":") > -1
@@ -132,12 +137,16 @@
             subs.splice i, 1
 
 
-  return
+  return {
     emit: pub,
     pub: pub,
+    emits: pubs,
+    pubs: pubs,
     on: sub,
     sub: sub,
     once: subOnce,
     subOnce: subOnce,
     off: unsub,
     unsub: unsub
+  }
+)

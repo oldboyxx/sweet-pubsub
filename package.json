@@ -1,5 +1,5 @@
 {
-  "name": "supersweet-pubsub",
+  "name": "sweet-pubsub",
   "version": "1.0.0",
   "description": "Simple publish && subscribe communication interface",
   "main": "dist/pubsub.js",
