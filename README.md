@@ -1,4 +1,4 @@
-Simple publish / subscribe communication interface
+Simple publish / subscribe communication interface. Licence - do whatever.
 
 # API
 
@@ -179,41 +179,39 @@ pubsub.off('userCreated userUpdated userDeleted', 'label')
 // remove all subscriptions
 ```
 
-### Advanced publish (you probably don't need this)
+### Emits - namespaced publish (you probably don't need this)
 
-I sometimes find it useful to visually namespace my topic names (eg. 'pageMounted:users')
-If you pass a topic namespaced by ':', pubsub will publish under two separate
+I sometimes find it useful to visually namespace my topic names so I added some sugar.
+
+If you use the 'emits' method and pass a topic name namespaced by ':' such as 'pageMounted:users', pubsub will emit two times. First 'pageMounted', then 'pageMounted:users'. It will also pass 'users' string to the 'pageMounted' emit as the first argument. Other arguments will follow in their original order.
 
 ```
 pubsub.on('pageMounted', (name) => {
   document.title = name
   analytics.track('pageview' {name: name})
+  ...do other general page stuff...
 })
 
 pubsub.on('pageMounted:users', () => {
   getSomeExtraUserData()
+  ...do stuff specific to users page...
 })
 
+pubsub.emits('pageMounted:users')
+
+// this is the same as writing:
+
+pubsub.emit(pageMounted', 'users')
 pubsub.emit(pageMounted:users')
 
-// same as writing:
+// if you want to change the order of topics add '-' to the beginning of topic name like this:
+
+pubsub.emits('-pageMounted:users')
+
+// this is the same as writing:
 
 pubsub.emit(pageMounted:users')
 pubsub.emit(pageMounted', 'users')
-
 ```
 
-### Advances
-
-
-
-
-
-
-
-
-
-
-
-
-
+# GL&HF
