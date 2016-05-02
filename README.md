@@ -4,7 +4,7 @@ Simple pubsub communication interface. Licence - do whatever.
 
 ### on
 alias: sub
-```
+```javascript
 pubsub.on( topic, callback )
 pubsub.on( topic, callback, priority )
 pubsub.on( topic, unsubscribeLabel, callback )
@@ -21,7 +21,7 @@ Returns the callback (useful when dealing with anonymous functions).
 
 ### once
 alias: subOnce
-```
+```javascript
 pubsub.once( topic, callback )
 pubsub.once( topic, callback, priority )
 pubsub.once( topic, unsubscribeLabel, callback )
@@ -33,7 +33,7 @@ Same as 'on' except the callback is invoked only once and subscription is automa
 
 ### emit
 alias: pub
-```
+```javascript
 pubsub.emit( topic, ...arguments )
 ```
 Publish - invoke topic subscriptions.
@@ -43,7 +43,7 @@ Publish - invoke topic subscriptions.
 
 ### off
 alias: unsub
-```
+```javascript
 pubsub.off( callback )
 pubsub.off( topic, callback )
 pubsub.off( unsubscribeLabel )
@@ -60,7 +60,7 @@ Remove subscriptions. If you don't pass a topic, all matching subscriptions will
 ### Basic usage
 
 Subscribe, then publish and pass some data
-```
+```javascript
 pubsub.on('userCreated', (age, email) => {
   console.log(age, email)
 })
@@ -70,7 +70,7 @@ pubsub.emit('userCreated', 30, 'dankmemer@420.com')
 ```
 
 Subscribe once, publish
-```
+```javascript
 pubsub.once('boom', () => {
   console.log('BANG!')
 })
@@ -83,7 +83,7 @@ pubsub.emit('boom')
 
 Subscribe, publish and unsubscribe
 
-```
+```javascript
 let callback = pubsub.on('boom', () => {
   console.log('BANG!')
 })
@@ -104,7 +104,7 @@ In this example we used the anonymous function returned by 'on' to unsubscribe. 
 
 You can control topic callback invocation order by assigning a priority to your subscriptions.
 
-```
+```javascript
 pubsub.on('boom', () => {
   console.log('FIVE')
 }, 5)
@@ -127,7 +127,7 @@ This is _generally_ a bad practice as it makes code harder to understand. It wou
 ### Unsubscribing via labels
 
 Unsubscribe globally across all topics
-```
+```javascript
 pubsub.on('userCreated', 'userActions', () => { do stuff... })
 pubsub.on('userUpdated', 'userActions', () => { do stuff... })
 pubsub.on('userDeleted', 'userActions', () => { do stuff... })
@@ -136,7 +136,7 @@ pubsub.off('userActions')
 // this will remove all three subscriptions 
 ```
 Unsubscribe scoped to a topic
-```
+```javascript
 pubsub.on('userCreated', 'userActions', () => { do stuff... })
 pubsub.on('userUpdated', 'userActions', () => { do stuff... })
 pubsub.on('userDeleted', 'userActions', () => { do stuff... })
@@ -147,7 +147,7 @@ pubsub.off('userCreated', 'userActions')
 
 ### Subscribe, publish, unsubscribe with multiple topics
 Simple example
-```
+```javascript
 pubsub.on('userCreated', () => {
   console.log('user created')
 })
@@ -161,7 +161,7 @@ pubsub.emit('userCreated userUpdated')
 // 'user updated'
 ```
 More complex example with labels and some data
-```
+```javascript
 pubsub.on('userCreated userUpdated', 'label', (data) => {
   console.log('user created or updated', data.a)
 })
@@ -180,12 +180,15 @@ pubsub.off('userCreated userUpdated userDeleted', 'label')
 ```
 
 ### Emits - namespaced publish (you probably don't need this)
+alias: pubs
 
 I sometimes find it useful to visually namespace my topic names so I added some sugar.
 
-If you use the 'emits' method and pass a topic name namespaced by ':' such as 'pageMounted:users', pubsub will emit two times. First 'pageMounted', then 'pageMounted:users'. It will also pass 'users' string to the 'pageMounted' emit as the first argument. Other arguments will follow in their original order.
+If you use the 'emits' method and pass a topic name namespaced by ':' such as 'pageMounted:users', pubsub will emit two times. First 'pageMounted', then 'pageMounted:users'.
 
-```
+It will also pass 'users' string to the 'pageMounted' emit as the first argument. Other arguments will follow in their original order.
+
+```javascript
 pubsub.on('pageMounted', (name) => {
   document.title = name
   analytics.track('pageview' {name: name})
@@ -201,8 +204,8 @@ pubsub.emits('pageMounted:users')
 
 // this is the same as writing:
 
-pubsub.emit(pageMounted', 'users')
-pubsub.emit(pageMounted:users')
+pubsub.emit('pageMounted', 'users')
+pubsub.emit('pageMounted:users')
 
 // if you want to change the order of topics add '-' to the beginning of topic name like this:
 
@@ -210,8 +213,8 @@ pubsub.emits('-pageMounted:users')
 
 // this is the same as writing:
 
-pubsub.emit(pageMounted:users')
-pubsub.emit(pageMounted', 'users')
+pubsub.emit('pageMounted:users')
+pubsub.emit('pageMounted', 'users')
 ```
 
 # GL&HF
