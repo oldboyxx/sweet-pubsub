@@ -1,4 +1,4 @@
-Simple publish / subscribe communication interface. Licence - do whatever.
+Simple pubsub communication interface. Licence - do whatever.
 
 # API
 
