@@ -1,6 +1,6 @@
 {
   "name": "sweet-pubsub",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Simple publish && subscribe communication interface",
   "main": "dist/pubsub.js",
   "repository": {
