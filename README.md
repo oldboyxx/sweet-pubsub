@@ -52,8 +52,8 @@ pubsub.off( topic, unsubscribeLabel )
 Remove subscriptions. If you don't pass a topic, all matching subscriptions will be removed across all topics.
 
 - `topic [string]` topic you're unsubscribing from
-- `callback [string]` remove all subscriptions that use this callback
-- `unsubscribeLabel [any type]` remove all subscriptions that have this label
+- `callback [function]` remove all subscriptions that use this callback
+- `unsubscribeLabel [string]` remove all subscriptions that have this label
 
 # Examples
 
@@ -133,7 +133,7 @@ pubsub.on('userUpdated', 'userActions', () => { do stuff... })
 pubsub.on('userDeleted', 'userActions', () => { do stuff... })
 
 pubsub.off('userActions')
-// this will remove all three subscriptions 
+// this will remove all three subscriptions
 ```
 Unsubscribe scoped to a topic
 ```javascript
